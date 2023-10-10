@@ -1,7 +1,7 @@
 // Add Express
 const express = require("express");
-const { Resend } = require("resend");
-const instanceResend = new Resend("re_LyRE6DiZ_CbHc8WtuiPEFT6Yy9Wsswuxt");
+const resend = require("resend");
+const { Resend } = resend;
 
 // Initialize Express
 const app = express();
@@ -10,7 +10,7 @@ const app = express();
 app.get("/", async (req, res) => {
   
   try {
-    const data = await instanceResend.emails.send({
+    const data = await Resend.emails.send({
       from: "Acme <onboarding@resend.dev>",
       to: ["acypriano@mtsolucoes.com.br"],
       subject: "hello world",

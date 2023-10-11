@@ -1,7 +1,9 @@
 // Add Express
-const express = require("express");
-const resend = require("resend");
-const { Resend } = resend;
+import express from 'express';
+import { Resend } from "resend";
+import 'dotenv/config';
+
+const resend = new Resend(process.env.RESEND_API_KEY);
 
 // Initialize Express
 const app = express();
@@ -10,7 +12,7 @@ const app = express();
 app.get("/", async (req, res) => {
   
   try {
-    const data = await Resend.emails.send({
+    const data = await resend.emails.send({
       from: "Acme <onboarding@resend.dev>",
       to: ["acypriano@mtsolucoes.com.br"],
       subject: "hello world",
@@ -26,6 +28,3 @@ app.get("/", async (req, res) => {
 app.listen(5000, () => {
   console.log("Running on port 5000.");
 });
-
-// Export the Express API
-module.exports = app;
